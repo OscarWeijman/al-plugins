@@ -1,0 +1,28 @@
+{
+  "name": "@abstractlang/plugin-search",
+  "version": "0.1.0",
+  "description": "Web search plugin for AbstractLang — structured search via Tavily",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "abstractlang",
+    "plugin",
+    "search",
+    "tavily"
+  ],
+  "author": "Oscar Pieter Weijman",
+  "license": "MIT",
+  "dependencies": {
+    "abstractlang": "file:../../cli"
+  },
+  "devDependencies": {
+    "@types/node": "^25.4.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}
