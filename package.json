@@ -1,0 +1,29 @@
+{
+  "name": "@abstractlang/plugin-ai",
+  "version": "0.1.0",
+  "description": "AI plugin for AbstractLang — LLM-powered text operations via OpenRouter",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "abstractlang",
+    "plugin",
+    "ai",
+    "translate",
+    "openrouter"
+  ],
+  "author": "Oscar Pieter Weijman",
+  "license": "MIT",
+  "dependencies": {
+    "abstractlang": "file:../../cli"
+  },
+  "devDependencies": {
+    "@types/node": "^25.4.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}
