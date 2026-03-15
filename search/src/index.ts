@@ -156,13 +156,21 @@ const extract: FunctionContract = {
   async execute(input) {
     const apiKey = getApiKey();
     const rawUrls = input.urls;
-    const urls: string[] = Array.isArray(rawUrls)
-      ? rawUrls.map((u: string) => u.trim())
-      : typeof rawUrls === "string"
-        ? rawUrls.includes(",")
-          ? rawUrls.split(",").map((u) => u.trim())
-          : [rawUrls.trim()]
-        : [];
+    let urls: string[];
+
+    if (Array.isArray(rawUrls)) {
+      urls = rawUrls.map((u: string) => String(u).trim()).filter(Boolean);
+    } else if (typeof rawUrls === "string" && rawUrls.trim()) {
+      urls = rawUrls.includes(",")
+        ? rawUrls.split(",").map((u) => u.trim()).filter(Boolean)
+        : [rawUrls.trim()];
+    } else {
+      throw new Error("urls must be a non-empty array or string");
+    }
+
+    if (urls.length === 0) {
+      throw new Error("urls must contain at least one valid URL");
+    }
 
     const response = await fetch(TAVILY_EXTRACT_URL, {
       method: "POST",

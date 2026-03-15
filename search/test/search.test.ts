@@ -261,6 +261,24 @@ describe("search.extract", () => {
     ).rejects.toThrow("Tavily Extract API error (401)");
   });
 
+  it("throws on invalid urls input", async () => {
+    await expect(
+      extract.execute({ urls: 42 }, makeCtx()),
+    ).rejects.toThrow("urls must be a non-empty array or string");
+  });
+
+  it("throws on empty string urls", async () => {
+    await expect(
+      extract.execute({ urls: "" }, makeCtx()),
+    ).rejects.toThrow("urls must be a non-empty array or string");
+  });
+
+  it("throws on empty array urls", async () => {
+    await expect(
+      extract.execute({ urls: [] }, makeCtx()),
+    ).rejects.toThrow("urls must contain at least one valid URL");
+  });
+
   it("returns empty results array when no content extracted", async () => {
     globalThis.fetch = vi.fn().mockResolvedValue({
       ok: true,
