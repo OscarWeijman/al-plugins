@@ -1,0 +1,30 @@
+{
+  "name": "@abstractlang/plugin-scrape",
+  "version": "0.1.0",
+  "description": "Scrape plugin for AbstractLang — extract content from web pages using CSS selectors",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "abstractlang",
+    "plugin",
+    "scrape",
+    "css-selector",
+    "cheerio"
+  ],
+  "author": "Oscar Pieter Weijman",
+  "license": "MIT",
+  "dependencies": {
+    "abstractlang": "file:../../cli",
+    "cheerio": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.4.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}
