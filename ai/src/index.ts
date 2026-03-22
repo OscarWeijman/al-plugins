@@ -22,6 +22,11 @@ const translate: FunctionContract = {
       required: true,
       description: "Target language (e.g. 'nl', 'Dutch', 'fr', 'German')",
     },
+    model: {
+      type: "string",
+      required: false,
+      description: "OpenRouter model ID (e.g. 'anthropic/claude-sonnet-4'). Defaults to claude-haiku-4.5.",
+    },
   },
   output: {
     type: "object",
@@ -32,6 +37,7 @@ const translate: FunctionContract = {
   async execute(input) {
     const content = input.content as string;
     const lang = input.lang as string;
+    const model = (input.model as string) ?? DEFAULT_MODEL;
 
     const apiKey = process.env.OPENROUTER_API_KEY;
     if (!apiKey) {
@@ -47,7 +53,7 @@ const translate: FunctionContract = {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: DEFAULT_MODEL,
+        model,
         messages: [
           {
             role: "user",
@@ -100,6 +106,11 @@ const summarize: FunctionContract = {
       required: false,
       description: "Summary length: short, medium, or long (default: medium)",
     },
+    model: {
+      type: "string",
+      required: false,
+      description: "OpenRouter model ID (e.g. 'anthropic/claude-sonnet-4'). Defaults to claude-haiku-4.5.",
+    },
   },
   output: {
     type: "object",
@@ -110,6 +121,7 @@ const summarize: FunctionContract = {
   async execute(input) {
     const content = input.content as string;
     const maxLength = (input.max_length as string) ?? "medium";
+    const model = (input.model as string) ?? DEFAULT_MODEL;
     const lengthInstruction = LENGTH_INSTRUCTIONS[maxLength] ?? LENGTH_INSTRUCTIONS.medium;
 
     const apiKey = process.env.OPENROUTER_API_KEY;
@@ -126,7 +138,7 @@ const summarize: FunctionContract = {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: DEFAULT_MODEL,
+        model,
         messages: [
           {
             role: "user",
